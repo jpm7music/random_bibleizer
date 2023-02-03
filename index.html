@@ -18,14 +18,11 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
     />
     <link rel="manifest" href='/manifest.json'>
-    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicons/favicon.ico?">
 
-    <meta
-      name="description"
-      content="Select a random Bible chapter to read in any English translation. If you're not sure what to read today, start here!"
-    />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <title>Random Bibleizer - Choose a Random Bible Chapter to Read</title>
+    <title>Biblia Aleatoria - Elige un capítulo aleatorio para leer</title>
   </head>
 
   <body>
@@ -37,27 +34,32 @@
       <v-app>
         <v-navigation-drawer app v-model="showDrawer" class="d-sm-none" disable-resize-watcher>
           <v-list-item>
-            <v-btn text href="mailto:hello@spiffy.tech?subject=%5BRandom%20Bibleizer%5D">Contact Me</v-btn>
-          </v-list-item>
-          <v-list-item>
             <v-btn text href="https://github.com/spiffytech/random_bibleizer"
-              >Source Code</v-btn
+              >Código fuente</v-btn
             >
           </v-list-item>
         </v-navigation-drawer>
 
         <v-app-bar app>
           <v-app-bar-nav-icon @click.stop="showDrawer = !showDrawer" class="d-sm-none"></v-app-bar-nav-icon>
-          <v-toolbar-title>Random Bibleizer</v-toolbar-title>
+          <v-toolbar-title>Biblia Aleatoria</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn text href="mailto:hello@spiffy.tech" class="d-none d-sm-flex">Contact Me</v-btn>
+          <v-btn text href="mailto:hello@spiffy.tech" class="d-none d-sm-flex">Contáctame</v-btn>
           <v-btn text href="https://github.com/spiffytech/random_bibleizer" class="d-none d-sm-flex"
-            >Source Code</v-btn
+            >Código fuente</v-btn
           >
         </v-app-bar>
 
         <v-main>
           <v-container>
+             <v-row justify="center" class="my-4">
+              <v-btn
+                @click="toggleSpinState"
+                :color="paused ? null : 'primary'"
+                >{{ paused ? "Aleatorio" : "Detener" }}</v-btn
+              >
+            </v-row>
+
             <v-row justify="center" class="my-4">
               <div v-if="displayedChapter" class="display-1">
                 {{displayedChapter.book.human}} {{displayedChapter.chapter}}
@@ -65,25 +67,17 @@
             </v-row>
 
             <v-row justify="center" class="my-4">
-              <v-btn
-                @click="toggleSpinState"
-                :color="paused ? null : 'primary'"
-                >{{ paused ? "Randomize" : "Stop shuffling" }}</v-btn
-              >
-            </v-row>
-
-            <v-row justify="center" class="my-4">
               <v-col cols="12" md="6">
                 <v-radio-group v-model="weightBooksEvenly" :default="true">
-                  <v-radio label="Choose random book, then random chapter from book" :value="true"></v-radio>
+                  <v-radio label="Elige un libro, luego un capítulo aleatorio de ese libro" :value="true"></v-radio>
                   <v-radio
-                    label="Randomly choose from all Bible chapters at once (Psalms comes up a lot)"
+                    label="Elige un capítulo aleatorio entre todos los de La Biblia (Salmos sale mucho)"
                     :value="false"
                   ></v-radio>
                 </v-radio-group>
                 <v-checkbox
                   v-model="openInBibleAppAuotmatically"
-                  :label="`Open in Bible app automatically`"
+                  :label="`Abrir en la app de La Biblia automáticamente`"
                 ></v-checkbox>
               </v-col>
 
@@ -91,7 +85,7 @@
                 <div style="display: contents;">
                   <v-select
                     :items="translations"
-                    label="Remember translation"
+                    label="Traducción"
                     v-model="selectedTranslation"
                     v-if="canUseLocalstorage"
                   />
@@ -100,11 +94,11 @@
                 <div style="display: contents;">
                   <v-select
                     :items="subsets"
-                    label="What to randomize?"
+                    label="¿De dónde seleccionar?"
                     v-model="contentSubset"
                   />
                 </div>
-                <v-btn :disabled="!paused" class="openBibleApp" @click="openBibleApp" :color="'primary'">Open in Bible app</v-btn>
+                <v-btn :disabled="!paused" class="openBibleApp" @click="openBibleApp" :color="'primary'">Abrir en La Biblia</v-btn>
               </v-col>
             </v-row>
 
@@ -207,10 +201,10 @@
       const lsWeights = localstorageTryGet('weightBooksEvenly');
       const lsOpenAuto = localstorageTryGet('openInBibleAppAuotmatically') === 'true';
       const subsets = [
-        {text: "Whole Bible", value: [0,66]},
-        {text: "Old Testament", value: [0,39]},
-        {text: "New Testament", value: [39,66]},
-        {text: "Psalms and Proverbs", value: [18,20]}
+        {text: "Toda La Biblia", value: [0,66]},
+        {text: "Antiguo Testamento", value: [0,39]},
+        {text: "Nuevo Testamento", value: [39,66]},
+        {text: "Salmos y Proverbios", value: [18,20]}
       ];
 
       new Vue({
@@ -218,7 +212,7 @@
         vuetify: new Vuetify(),
         data: {
           showDrawer: false,
-          selectedTranslation: localstorageTryGet("savedTranslation") || "GW",
+          selectedTranslation: localstorageTryGet("savedTranslation") || "NTV",
           translations: window.translations.map(translation => ({
             text: translation.local_title,
             value: translation.local_abbreviation
@@ -270,7 +264,7 @@
             // We want to explicitly throttle on time, not frame rate.
             // High-refresh mobile displays still feel caffeinated if we lock on
             // framerate.
-            if (this.lastDraw <= performance.now() - 180) {
+            if (this.lastDraw <= performance.now() - 40) {
               this.displayedChapter = fn(window.books.slice(this.contentSubset[0], this.contentSubset[1]));
               this.lastDraw = performance.now();
             }
