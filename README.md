@@ -1,7 +1,7 @@
-Random Bibleizer
+Random Bibleizer (Spanish Version)
 ================
 
-> See it in action at [http://randombibleizer.spiffy.tech](http://randombibleizer.spiffy.tech)
+> See it in action at [https://jpm7music.github.io/random_bibleizer/](https://jpm7music.github.io/random_bibleizer/)
 
 
-The Random Bibleizer randomly chooses a bible book & chapter for you to read today.
+El Random Bibleizer elige aleatoreamente un libro y capítulo para que leas. Se sincroniza con la app de YouVersion
