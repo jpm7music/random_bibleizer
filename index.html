@@ -53,14 +53,6 @@
         <v-main>
           <v-container>
              <v-row justify="center" class="my-4">
-              <v-btn
-                @click="toggleSpinState"
-                :color="paused ? null : 'primary'"
-                >{{ paused ? "Aleatorio" : "Detener" }}</v-btn
-              >
-            </v-row>
-
-            <v-row justify="center" class="my-4">
               <div v-if="displayedChapter" class="display-1">
                 {{displayedChapter.book.human}} {{displayedChapter.chapter}}
               </div>
@@ -101,6 +93,15 @@
                 <v-btn :disabled="!paused" class="openBibleApp" @click="openBibleApp" :color="'primary'">Abrir en La Biblia</v-btn>
               </v-col>
             </v-row>
+
+            <v-row justify="center" class="my-4">
+              <v-btn
+                @click="toggleSpinState"
+                :color="paused ? null : 'primary'"
+                >{{ paused ? "Aleatorio" : "Detener" }}</v-btn
+              >
+            </v-row>
+
 
             <hr />
 
@@ -212,7 +213,7 @@
         vuetify: new Vuetify(),
         data: {
           showDrawer: false,
-          selectedTranslation: localstorageTryGet("savedTranslation") || "NTV",
+          selectedTranslation: localstorageTryGet("savedTranslation") || "NBLA",
           translations: window.translations.map(translation => ({
             text: translation.local_title,
             value: translation.local_abbreviation

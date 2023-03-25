@@ -12,6 +12,12 @@ window.translations = [
     local_abbreviation: "LBLA"
   },
   {
+    id: 103,
+    local_title: "Nueva Biblia de Las Américas",
+    audio: false,
+    local_abbreviation: "NBLA"
+  },
+  {
     id: 127,
     local_title: "Nueva Traducción Viviente",
     audio: true,
