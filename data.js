@@ -6,6 +6,12 @@ window.translations = [
     local_abbreviation: "DHH94I"
   },
   {
+    id: 59,
+    local_title: "English Standart Version",
+    audio: true,
+    local_abbreviation: "ESV"
+  },
+  {
     id: 89,
     local_title: "La Biblia de Las Américas",
     audio: false,
@@ -46,6 +52,12 @@ window.translations = [
     local_title: "Reina Valera Actualizada",
     audio: false,
     local_abbreviation: "RVA2015"
+  },
+  {
+    id: 157,
+    local_title: "Schlachter 2000",
+    audio: false,
+    local_abbreviation: "SCH2000"
   },
   {
     id: 176,
