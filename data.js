@@ -1,9 +1,9 @@
 window.translations = [
   {
-    id: 52,
+    id: 411,
     local_title: "Dios Habla Hoy",
     audio: false,
-    local_abbreviation: "DHH94I"
+    local_abbreviation: "DHH94PC"
   },
   {
     id: 59,
