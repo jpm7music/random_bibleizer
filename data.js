@@ -102,7 +102,7 @@ window.books = [
   { human: "Miqueas", usfm: "MIC", chapters: 7 },
   { human: "Nahúm", usfm: "NAM", chapters: 3 },
   { human: "Habacuc", usfm: "HAB", chapters: 3 },
-  { human: "Sofonía", usfm: "ZEP", chapters: 3 },
+  { human: "Sofonías", usfm: "ZEP", chapters: 3 },
   { human: "Hageo", usfm: "HAG", chapters: 2 },
   { human: "Zacarías", usfm: "ZEC", chapters: 14 },
   { human: "Malaquías", usfm: "MAL", chapters: 4 },
